@@ -4,6 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Job;
+use App\Models\Task;
+use App\Models\UserTask;
+use App\Models\Announcement;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,4 +54,35 @@ class User extends Authenticatable
     {
         return $this->hasMany(Job::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function user_tasks()
+    {
+        return $this->hasMany(UserTask::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
+    }
+
+    public function resignation()
+    {
+        return $this->hasOne(Resignation::class);
+    }
+    
 }

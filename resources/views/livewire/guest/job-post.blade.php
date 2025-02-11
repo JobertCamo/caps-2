@@ -65,7 +65,7 @@ class extends Component {
 }; ?>
 
 <div class="selection:bg-yellow-300 selection:text-yellow-900 flex items-center  bg-white justify-center w-full h-screen text-black pb-3"
-    x-data="{ details: open }">
+    x-data="{ details: open, tae: true }">
     <div class="lg:w-[90%] h-full flex overflow-hidden md:w-[85%] sm:w[80%] w-[90%]" x-data="{appModal: false}">
         <!-- Left Column -->
         <div class="flex-1 h-full px-5 space-y-5 overflow-auto scrollbar-custom overflow-y-scroll">
@@ -112,44 +112,47 @@ class extends Component {
         </div>
         
         @if($test)
-              {{-- mobile --}}
-              <div class="lg:hidden flex flex-col h-full top-32 fixed inset-0 card items-center justify-center z-20" x-show="details"  x-transition:enter="transform transition ease-out duration-500"
-                    x-transition:enter-start="translate-y-full opacity-0"
-                    x-transition:enter-end="translate-y-0 opacity-100"
-                    x-transition:leave="transform transition ease-in duration-500"
-                    x-transition:leave-start="translate-y-0 opacity-100"
-                    x-transition:leave-end="translate-y-full opacity-0" x-cloak>
-                    <x-preloader />
-
-                  <div @click.away="details = false" class="flex flex-col justify-center items-center px-2">
-                      <div class="absolute top-0 right-0">
-                          <x-mini-button label="X" icon="x-mark" @click="details = false" negative flat
-                              interaction="negative" />
-                      </div>
-                      <p class="font-bold text-2xl" x-text="$wire.title"></p>
-                      <ul class="list-disc list-inside text-gray-700">
-                          <li>{{ $test->location }}</li>
-                        <li>{{ $test->schedule }}</li>
-                        <li>{{ $test->salary }}</li>
-                      </ul>
-                      <h1 class="font-bold text-xl">Job Description</h1>
-                      <p class="flex break-all text-gray-700"> {{ $test->description }}</p>
-                      <h1 class="font-bold text-xl">Job Requirements</h1>
-                      <div class="flex flex-col">
-                      @foreach (explode(',', $test->requirements) as $requirement)
-                          <li> {{ $requirement }}</li>
-                      @endforeach
-                      </div>
-                      <x-button href="/application/{{ $test->title }}" wire:navigate.hover class="mt-2 font-bold"  amber label="Apply Now" />
-                  </div>
-              </div>
-              {{-- mobile --}}
+              <div x-show="details" x-cloak class="md:hidden px-2 md:px-0 transition-all duration-300 flex h-screen w-full bg-black/20 fixed top-0 left-0 z-50  justify-center items-center">
+                <x-mobile-preloader />
+                <div @click.away="details = false" class="bg-white max-w-[360px] lg:max-w-[450px] min-w-[350px] lg:min-w-[450px] max-h-[540px] min-h-[550px] overflow-auto flex flex-col justify-between px-2 py-3 rounded-lg">
+                    <div class="text-center space-y-4 ">
+                        <div >
+                            <div class="text-sm">Job Title</div>
+                            <div style="margin-top: -5px" class="text-2xl font-bold">{{ $test->title }}</div>
+                        </div>
+                        <div>
+                            <div class="text-sm">details</div>
+                            <div class="flex justify-center items-center gap-4 text-lg " style="margin-top: -5px">
+                                <div>{{ $test->location }}</div>
+                                <div>{{ $test->salary }}</div>
+                                <div>{{ $test->schedule }}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">Job Description</div>
+                            <div class="text-gray-600" style="margin-top: -5px">
+                                {{ $test->description }}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">Job Requirements</div>
+                            <div class="text-gray-600" style="margin-top: -5px">
+                                @foreach (explode(',', $test->requirements) as $requirement)
+                                    <li> {{ $requirement }}</li>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <x-button href="/application/{{ $firstJob->id }}" wire:navigate label="Apply Now" amber />
+                </div>
+            </div>
+        
+              
         @endif
 
-        <!-- Right Column for Sorting Component (Responsive) -->
-        <div class="space-y-3 flex-1 hidden h-full justify-center p-4 lg:basis-52 md:basis lg:flex md:flex sm:hidden relative">
-            {{-- <x-usercomponent.jobsorting /> --}}
+        
 
+        <div class="space-y-3 flex-1 hidden h-full justify-center p-4 lg:basis-52 md:basis lg:flex md:flex sm:hidden relative">
             <x-preloader/>
             @if (isset($test))
 

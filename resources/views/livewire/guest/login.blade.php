@@ -22,11 +22,8 @@ new class extends Component {
                 'email' => 'Email or password do not match!'
             ]);
         }
-
         session()->regenerate();
-
-        $this->redirect('/candidate-list');
-
+        Auth::user()->role !== 'hr' ? $this->redirect('/employee-dashboard') : $this->redirect('/candidate-list');
     }
     
 }; ?>

@@ -12,7 +12,7 @@
     <section class="max-w-2xl px-6 py-8 mx-auto bg-white dark:bg-gray-900">
         <header>
             <a href="#" class="flex gap-2 items-center">
-                <img class="w-auto h-16 sm:h-16" src="{{ asset('images/companylogo.png') }}" alt="">
+                {{-- <img class="w-auto h-16 sm:h-16" src="{{ asset('images/companylogo.png') }}" alt=""> --}}
                 <span style="
                 font-size: 2.25rem; /* text-4xl */
                 line-height: 2.5rem; /* text-4xl */

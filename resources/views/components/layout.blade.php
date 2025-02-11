@@ -11,7 +11,7 @@
     @livewireStyles
 </head>
     <body class="overflow-auto bg-slate-200 text-black font-roboto scrollbar-thin soft-scrollbar">
-        <nav class="flex justify-between bg-white drop-shadow-lg p-3 items-center">
+        <nav class="flex justify-between bg-white drop-shadow-lg p-3 items-center relative">
             <div>
                 <ul class="flex flex-row items-center Lightnav space-x-2 ">
                     <li> <x-icon name="bars-3" class=" size-6 hidden lg:block  " onclick="toggleSidebar()" /></li>
@@ -21,18 +21,20 @@
             </div>
             <div class="flex items-center space-x-3">
                 <div>
-                    <x-icon name="inbox-arrow-down" class="size-6 shrink-0"/>
-                </div>
-                <div>
                     <x-icon name="bell-alert" class="size-6 shrink-0"/>
                 </div>
                 <div x-data="{profileDropdown: false}" class="">
-                    <img @click="profileDropdown = true" src="{{asset('images/sqaure.png')}}" alt="" class="rounded-full w-9">
+                    <img @click="profileDropdown = true" src="{{ 'storage/' . Auth::user()->profile_picture }}" alt="" class="rounded-full w-9">
                     <div x-show="profileDropdown" x-transition x-cloak class=" absolute -bottom-[5em] right-2 px-5 py-3 bg-white rounded-md">
                         <div @click.away="profileDropdown = false" class="">
                             <ul class="space-y-2">
                                 <li><a wire:navigate  class="flex gap-1" href="">Profile<x-icon name="user" class="w-4"/></a></li>
-                                <li><a wire:navigate  class="flex gap-1" href="/logout">Log Out<x-icon name="arrow-up-tray" class="w-4"/></a></li>
+                                <li>
+                                    <form action="/logout" method="POST">
+                                        @csrf
+                                        <button type="submit" class="flex gap-1">Log Out<x-icon name="arrow-up-tray" class="w-4"/></button>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -41,9 +43,11 @@
         </nav>
         <div class="flex">
             {{-- PC ASIDE --}}
-            <aside class="transition-all duration-500 absolute lg:static w-[300px] hidden lg:block h-screen" id="sidebar">
+            <aside class="transition-all bg-[#FFFFFF] duration-500 absolute lg:static w-[300px] hidden lg:block h-screen" id="sidebar">
                 <div class=" bg-[#FFFFFF] overflow-y-auto scrollbar-hidden">
                     <ul class="flex flex-col gap-2 bg-opacity-0 transition-all duration-500" id="sidebarcontent" >
+                        @can('view-page')
+                            
                         <div x-data="{ open: true }">
                             <button x-on:click="open = ! open" class="titlesidebar ">
                                 <p>Recruitment</p>
@@ -76,7 +80,7 @@
                                     class="side">
                                     <a 
                                         wire:navigate  href="/create-job" class="{{ request()->is('create-job') ? 'bg-amber-200 font-bold' : '' }}">
-                                        Post a Job
+                                        Post a Jobs
                                     </a>
                                 </li>
                                 {{--  --}}
@@ -116,21 +120,44 @@
                             </a>
                         </li>
                         <li class="side">
-                            <a wire:navigate  href="/employee-dashboard">
-                                Employee Portal
-                            </a>
-                        </li>
-                        <li class="side">
-                            <a wire:navigate  href="/employee-task">
+                            <a wire:navigate  href="/offboarding">
                                 Offboarding
                             </a>
                         </li>
+                        <li class="side">
+                            <a wire:navigate  href="/wall">
+                                Freedom Wall
+                            </a>
+                        </li>
+                        @endcan
+                        @cannot('view-page')
+                        <label for="EMPLOYEE ENGANEMENT" class="titlesidebar">
+                            Employee Portal
+                        </label>
+                        <li class="side">
+                            <a wire:navigate href="{{ url('/employee-dashboard') }}" class="{{ request()->is('employee-dashboard') ? 'bg-amber-200 font-bold' : '' }}">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="side">
+                            <a wire:navigate href="/wall" class="{{ request()->is('wall') ? 'bg-amber-200 font-bold' : '' }}">
+                                Freedom Wall
+                            </a>
+                        </li>
+                        <li class="side">
+                            <a wire:navigate href="/resignation" class="{{ request()->is('resignation') ? 'bg-amber-200 font-bold' : '' }}">
+                                Resignation
+                            </a>
+                        </li>
+                        @endcannot
+                        
                         {{-- <label for="EMPLOYEE ENGANEMENT" class="titlesidebar">
                             Learning Managment
                         </label> --}}
                         
                     </ul>
-
+                    @can('view-page')
+                        
                     {{-- ICON SIDEBAR --}}
                     <ul class="flex items-center flex-col gap-2 p-2 bg-opacity-0 transition-all duration-500 hidden" id="iconside" >
                         <div x-data="{ open: true }" class=" group">
@@ -207,7 +234,6 @@
                                 <x-icon name="users" class="shrink-0 size-6"/>
                             </a>
                         </li>
-
                         <li class="side">
                             <a>
                                 <x-icon name="book-open" class="shrink-0 size-6"/>
@@ -215,22 +241,25 @@
                         </li>
                     </ul>
                 </div>
+                @endcan
 
                 {{-- PHONE ASIDE --}}
             </aside>
-            <aside class="transition-all duration-500 absolute lg:static w-[300px] z-10 lg:hidden block" id="phonebar">
+            <aside class="-translate-x-full transition-all duration-500 absolute lg:static w-[300px] z-10 lg:hidden block" id="phonebar">
                 <div class=" bg-amber-400 h-screen overflow-y-auto scrollbar-hidden">
                     <ul class="flex flex-col gap-2 p-2 bg-opacity-0 transition-all duration-500" id="sidebarcontent" >
                         <label for="menu" class="border-none titlesidebar">
                             Menu
                         </label>
                         <label for="EMPLOYEE ENGANEMENT" ></label>
+                        @can('view-page')
                         <div x-data="{ open: true }">
                             <button x-on:click="open = ! open" class="titlesidebar">Recruitment
                                 <span :class="open ? 'rotate-90' : 'rotate-0'" class="arrow transition-transform duration-300 inline-block">
                                     <x-icon name="chevron-right"/>
                                 </span>
                             </button>
+                                
                             <div x-show="open"
                                     x-transition:enter="transition ease-out duration-300"
                                     x-transition:enter-start="opacity-0 translate-y-2"
@@ -238,21 +267,22 @@
                                     x-transition:leave="transition ease-in duration-200"
                                     x-transition:leave-start="opacity-100 translate-y-0"
                                     x-transition:leave-end="opacity-0 translate-y-2">
-                                <li class="side"><a wire:navigate  href="/job-create">Job Creation</a></li>
+                                <li class="side"><a wire:navigate  href="/create-job">Job Creation</a></li>
                                 <li class="side"><a wire:navigate  href="/jobpost">Posting</a></li>
-                                <li class="side"><a wire:navigate  href="/application">Application Form</a></li>
-                                <li class="side"><a wire:navigate  href="/exam">Initial Questions</a></li>
                             </div>
                         </div>
                         <label for="EMPLOYEE ENGANEMENT" class="titlesidebar">Applicant Tracking</label>
-                        <li class="side"><a wire:navigate  href="/applicant-list">Applicants</a></li>
-                        <li class="side"><a wire:navigate  href="/candidates">Candidates</a></li>
+                        <li class="side"><a wire:navigate  href="/candidate-list">Applicants</a></li>
+                        <li class="side"><a wire:navigate  href="/applicants">Candidates</a></li>
                         <label for="EMPLOYEE ENGANEMENT" class="titlesidebar">Onboarding</label>
-                        <li class="side"><a wire:navigate  href="/employees">Employee List</a></li>
-                        <li class="side"><a wire:navigate  href="/employee-dashboard">Task List</a></li>
-                        <li class="side"><a wire:navigate  href="/onboard">Task Creation</a></li>
-                        <li class="side"><a wire:navigate  href="/initial">Document Management</a></li>
-                        <label for="EMPLOYEE ENGANEMENT" class="titlesidebar">Learning Managment</label>
+                        <li class="side"><a wire:navigate  href="/employees">New Hire List</a></li>
+                        <li class="side"><a wire:navigate  href="/hr-task">Task List</a></li>
+                        @endcan
+                        @cannot('view-page')
+                            <li class="side"><a wire:navigate  href="/employee-dashboard">Dashboard</a></li>
+                            <li class="side"><a wire:navigate  href="/wall">Freedom Wall</a></li>
+                            <li class="side"><a wire:navigate  href="/resignation">Resignation</a></li>
+                        @endcannot
                     </ul>
                 </div>
             </aside>

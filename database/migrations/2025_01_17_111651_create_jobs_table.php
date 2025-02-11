@@ -16,11 +16,12 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(User::class);
             $table->string('title');
-            $table->string('description');
-            $table->string('requirements');
+            $table->text('description');
+            $table->text('requirements');
             $table->string('salary');
             $table->string('location');
             $table->string('schedule')->default('Full Time');
+            $table->string('department');
             $table->timestamps();
         });
     }

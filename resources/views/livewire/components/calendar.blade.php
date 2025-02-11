@@ -8,6 +8,7 @@ new class extends Component {
     
     public function with()
     {
+        $interview = '';
         $interviews = Interview::whereNotNull('interview_date') // Exclude null values
         ->select('interview_date', 'title', 'time') // Select necessary fields
         ->get()

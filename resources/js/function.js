@@ -25,56 +25,56 @@ function closeSideOnClickOutside(event) {
 }
 
 // Toggle Passed Applicants Sidebar
-window.togglePassed = function () {
-    const tablepassed = document.getElementById('table-passed');
-    console.log('Toggling Passed Applicants Sidebar');
+// window.togglePassed = function () {
+//     const tablepassed = document.getElementById('table-passed');
+//     console.log('Toggling Passed Applicants Sidebar');
 
-    if (tablepassed.classList.contains('translate-x-full')) {
-        tablepassed.classList.remove('translate-x-full');
-        tablepassed.classList.add('translate-x-0');
-        document.addEventListener('click', closePassedOnClickOutside);
-    } else {
-        tablepassed.classList.remove('translate-x-0');
-        tablepassed.classList.add('translate-x-full');
-        document.removeEventListener('click', closePassedOnClickOutside);
-    }
-};
+//     if (tablepassed.classList.contains('translate-x-full')) {
+//         tablepassed.classList.remove('translate-x-full');
+//         tablepassed.classList.add('translate-x-0');
+//         document.addEventListener('click', closePassedOnClickOutside);
+//     } else {
+//         tablepassed.classList.remove('translate-x-0');
+//         tablepassed.classList.add('translate-x-full');
+//         document.removeEventListener('click', closePassedOnClickOutside);
+//     }
+// };
 
-function closePassedOnClickOutside(event) {
-    const tablepassed = document.getElementById('table-passed');
-    if (!tablepassed.contains(event.target) && !event.target.closest('.count-card')) {
-        console.log('Clicked outside, closing Passed sidebar');
-        tablepassed.classList.remove('translate-x-0');
-        tablepassed.classList.add('translate-x-full');
-        document.removeEventListener('click', closePassedOnClickOutside);
-    }
-}
+// function closePassedOnClickOutside(event) {
+//     const tablepassed = document.getElementById('table-passed');
+//     if (!tablepassed.contains(event.target) && !event.target.closest('.count-card')) {
+//         console.log('Clicked outside, closing Passed sidebar');
+//         tablepassed.classList.remove('translate-x-0');
+//         tablepassed.classList.add('translate-x-full');
+//         document.removeEventListener('click', closePassedOnClickOutside);
+//     }
+// }
 
-// Toggle Failed Applicants Sidebar
-window.toggleFailed = function () {
-    const tablefailed = document.getElementById('table-failed');
-    console.log('Toggling Failed Applicants Sidebar');
+// // Toggle Failed Applicants Sidebar
+// window.toggleFailed = function () {
+//     const tablefailed = document.getElementById('table-failed');
+//     console.log('Toggling Failed Applicants Sidebar');
 
-    if (tablefailed.classList.contains('translate-x-full')) {
-        tablefailed.classList.remove('translate-x-full');
-        tablefailed.classList.add('translate-x-0');
-        document.addEventListener('click', closeFailedOnClickOutside);
-    } else {
-        tablefailed.classList.remove('translate-x-0');
-        tablefailed.classList.add('translate-x-full');
-        document.removeEventListener('click', closeFailedOnClickOutside);
-    }
-};
+//     if (tablefailed.classList.contains('translate-x-full')) {
+//         tablefailed.classList.remove('translate-x-full');
+//         tablefailed.classList.add('translate-x-0');
+//         document.addEventListener('click', closeFailedOnClickOutside);
+//     } else {
+//         tablefailed.classList.remove('translate-x-0');
+//         tablefailed.classList.add('translate-x-full');
+//         document.removeEventListener('click', closeFailedOnClickOutside);
+//     }
+// };
 
-function closeFailedOnClickOutside(event) {
-    const tablefailed = document.getElementById('table-failed');
-    if (!tablefailed.contains(event.target) && !event.target.closest('.count-card')) {
-        console.log('Clicked outside, closing Failed sidebar');
-        tablefailed.classList.remove('translate-x-0');
-        tablefailed.classList.add('translate-x-full');
-        document.removeEventListener('click', closeFailedOnClickOutside);
-    }
-}
+// function closeFailedOnClickOutside(event) {
+//     const tablefailed = document.getElementById('table-failed');
+//     if (!tablefailed.contains(event.target) && !event.target.closest('.count-card')) {
+//         console.log('Clicked outside, closing Failed sidebar');
+//         tablefailed.classList.remove('translate-x-0');
+//         tablefailed.classList.add('translate-x-full');
+//         document.removeEventListener('click', closeFailedOnClickOutside);
+//     }
+// }
 
 // Scroll to Applicants Table
 // function scrollToApplicantsTable() {

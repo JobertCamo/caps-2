@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('religion');
             $table->string('civil_status');
             $table->string('resume');
+            $table->string('department');
             $table->string('refered_by')->nullable();
             $table->string('job_position');
             $table->string('status')->default('applicant');

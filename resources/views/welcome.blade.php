@@ -32,6 +32,17 @@ Schema::create('tasks', function (Blueprint $table) {
     $table->timestamps();
 });
 
+Schema::create('employee_tasks', function (Blueprint $table) {
+    $table->id();
+    $table->foreignIDfor('employee');
+    $table->string('title');
+    $table->string('details');
+    $table->string('status')->unique();
+    $table->timestamps();
+});
+
+
+
 Schema::create('employee', function (Blueprint $table) {
     $table->id();
     $table->string('name');

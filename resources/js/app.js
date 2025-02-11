@@ -40,7 +40,7 @@ window.togglePhoneSidebar = function() {
     if (phonebar.classList.contains('-translate-x-full')) {
         // Expand phonebar (slide-in)
         phonebar.classList.remove('-translate-x-full');
-        phonebar.classList.add('translate-x-0');
+        // phonebar.classList.add('translate-x-0');
     } else {
         // Collapse phonebar (slide-out)
         phonebar.classList.remove('translate-x-0');
