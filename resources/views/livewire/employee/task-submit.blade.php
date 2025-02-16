@@ -22,6 +22,7 @@ new class extends Component {
         ]);
 
         $this->task->delete();
+        $this->redirect('/task-list');
     }
     
 }; ?>

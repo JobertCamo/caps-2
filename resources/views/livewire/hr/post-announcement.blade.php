@@ -15,6 +15,7 @@ new class extends Component {
         Auth::user()->announcements()->create($data);
 
         $this->reset();
+        $this->redirect('/hr-task');
     }
     
 }; ?>

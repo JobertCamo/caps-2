@@ -27,6 +27,7 @@ new class extends Component {
             'schedule' => $data['schedule'],
             'status' => $data['status'],
         ]);
+        $this->redirect('/offboarding');
     }
 
     public function update(Resignation $resignation)

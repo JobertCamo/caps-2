@@ -17,6 +17,7 @@ new class extends Component {
             'post' => $this->post,
         ]);
         $this->reset();
+        $this->redirect('/wall');
     }
     
 }; ?>

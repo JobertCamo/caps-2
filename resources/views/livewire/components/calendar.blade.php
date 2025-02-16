@@ -10,7 +10,7 @@ new class extends Component {
     {
         $interview = '';
         $interviews = Interview::whereNotNull('interview_date') // Exclude null values
-        ->select('interview_date', 'title', 'time') // Select necessary fields
+        ->select('interview_date') // Select necessary fields
         ->get()
         ->groupBy(fn($item) => Carbon::parse($item->interview_date)->format('Y-m-d'));
 

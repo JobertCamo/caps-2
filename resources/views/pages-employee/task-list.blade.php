@@ -1,11 +1,11 @@
 <x-layout>
-    <div x-data="{tass: false}">
+    <div x-data="{tass: false, task: 'incomplete'}">
         <div class="flex flex-col md:flex-row items-center justify-between bg-white shadow-md rounded-lg p-4 mb-4">
             <div class="flex items-center space-x-4">
                 <div class="font-bold">Employee Dashboard / <span class="font-normal">Home</span></div>
             </div>
         </div>
-        <div class="grid lg:grid-cols-5 gap-4" x-data="{task: 'incomplete'}">
+        <div class="grid lg:grid-cols-5 gap-4">
             <div class="relative overflow-x-auto  lg:px-3 lg:col-span-3 ">
                 <div class="bg-white mb-2 p-3 space-y-3 shadow-md rounded-lg">
                     <div class="text-2xl font-bold">Task Lists</div>

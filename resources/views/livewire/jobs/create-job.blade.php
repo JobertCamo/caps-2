@@ -74,7 +74,14 @@ new class extends Component {
                     :options="['Quezon City', 'Pasig City']"
                 />
             <x-input label="Tags" wire:model="tags" errorless/>
-            <x-input label="Department" wire:model="department" errorless/>
+            {{-- <x-input label="Department" wire:model="department" errorless/> --}}
+            <x-native-select
+                    label="Department"
+                    wire:model="department"
+                    errorless
+                    placeholder="Select"
+                    :options="['IT Department', 'Sales Department']"
+                />
         </div>
         <div class="w-full flex items-center gap-3 space-x-2 ">
             <x-textarea label="Description" placeholder="write description" class="" wire:model="description" errorless/>

@@ -35,6 +35,7 @@ new class extends Component {
         $data['department'] = $this->department;
         $data['file'] = $this->file->store('resignations', 'public');
         Resignation::create($data);
+        $this->redirect('/offboarding');
     }
     
     public function updated()
@@ -66,8 +67,7 @@ new class extends Component {
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
-                        {{ $selectedUser }}
-                        {{ $contact }}
+                        
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>

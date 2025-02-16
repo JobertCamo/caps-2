@@ -44,7 +44,7 @@ new #[layout('components.usercomponent.appform-layout')]
 
         $validatedData = $this->validate([
             'first_name' => ['required','min:2'],
-            'middle_name' => ['required','min:2'],
+            'middle_name' => ['required'],
             'last_name' => ['required','min:2'],
             'email' => ['required','email','unique:applicants,email'],
             'gender' => ['required'],

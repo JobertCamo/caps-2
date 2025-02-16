@@ -31,9 +31,20 @@ Route::middleware('auth')->group(function() {
     Volt::route('/profile', 'employee.profile')->can('view-page-employee');
 });
 Volt::route('/jobpost', 'guest.job-post');
-Route::middleware('guest')->group(function() {
-    Route::view('/', 'user.login')->name('login');
-});
+// Route::middleware('guest')->group(function() {
+//     Route::view('/', 'user.login')->name('login');
+// });
+
+Route::get('/', function () {
+    if (auth()->check()) {
+        if(Auth::user()->role === 'hr'){
+            return redirect('/candidate-list');
+        }elseif(Auth::user()->role === 'emp'){
+            return redirect('/employee-dashboard');
+        }
+    }
+    return view('user.login');
+})->name('login');
 
 Route::view('/employee-task', 'julsfolder.hr-portal');
 Volt::route('/resignation', 'employee.resignation-form');

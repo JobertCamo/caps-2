@@ -35,7 +35,8 @@ new class extends Component {
             ];
         });
 
-    Task::insert($tasks->toArray());
+        Task::insert($tasks->toArray());
+        $this->redirect('/hr-task');
     
     }
     

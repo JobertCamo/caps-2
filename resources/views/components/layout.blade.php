@@ -28,7 +28,7 @@
                     <div x-show="profileDropdown" x-transition x-cloak class=" absolute -bottom-[5em] right-2 px-5 py-3 bg-white rounded-md">
                         <div @click.away="profileDropdown = false" class="">
                             <ul class="space-y-2">
-                                <li><a wire:navigate  class="flex gap-1" href="">Profile<x-icon name="user" class="w-4"/></a></li>
+                                <li><a wire:navigate  class="flex gap-1" href="/profile">Profile<x-icon name="user" class="w-4"/></a></li>
                                 <li>
                                     <form action="/logout" method="POST">
                                         @csrf
