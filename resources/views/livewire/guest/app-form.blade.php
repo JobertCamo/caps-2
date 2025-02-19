@@ -64,6 +64,7 @@ new #[layout('components.usercomponent.appform-layout')]
         
         $validatedData['job_position'] = $this->job->title;
         $validatedData['department'] = $this->job->department;
+        $validatedData['salary'] = $this->job->salary;
 
         $parser = new \Smalot\PdfParser\Parser();
         $pdf = $parser->parseFile(public_path('storage/'.$pdf));

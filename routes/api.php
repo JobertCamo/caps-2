@@ -8,4 +8,4 @@ use App\Http\Controllers\EmployeeController;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::apiResource('employee', EmployeeController::class);
+Route::apiResource('employee', EmployeeController::class)->middleware('auth:sanctum');

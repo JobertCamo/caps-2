@@ -55,7 +55,9 @@ new #[layout('components.layout')]
         $validated['status'] = "scheduled";
         $interview = $this->applicant->interviews()->create($validated);
         
-        $formattedDate = Carbon::parse($this->interview_date)->setTimezone('Asia/Manila')->format('F d, Y - h:i A');
+        $formattedDate = Carbon::parse($this->interview_date)
+                            ->setTimezone('Asia/Manila')
+                            ->format('F d, Y - h:i A');
 
         Mail::to($this->applicant->email)->send(
             new schedule($formattedDate, $this->location, $this->interviewer, $this->jo)

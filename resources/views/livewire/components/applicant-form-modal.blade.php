@@ -35,9 +35,10 @@ new class extends Component {
             'civil_status' => ['required'],
         ]);
 
-        $data['resume'] = 'none';
-        $data['job_position'] = 'Onsite';
-        $data['department'] = 'Onsite';
+        $data['resume'] = 'N/A';
+        $data['job_position'] = 'N/A';
+        $data['department'] = 'N/A';
+        $data['salary'] = 'N/A';
         Applicant::create($data);
         $this->dispatch('store-notif');
     }

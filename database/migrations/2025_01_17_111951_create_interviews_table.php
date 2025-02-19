@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('interviewer');
             $table->string('feedback')->nullable();
-            $table->enum('status', ['scheduled', 'Passed', 'Failed', 'Canceled']);
+            $table->enum('status', ['scheduled', 'Passed', 'Failed', 'No Show']);
             $table->timestamps();
         });
     }

@@ -80,6 +80,7 @@ new class extends Component {
             'birth_date' => $applicant->birth_date,
             'contact' => $applicant->contact,
             'job_position' => $applicant->job_position,
+            'salary' => $applicant->salary,
             'department' => $applicant->department,
         ]);
         } catch (\Throwable $th) {
@@ -121,7 +122,7 @@ new class extends Component {
                         <x-native-select
                                 wire:model.live="filter"
                                 placeholder="All"
-                                :options="['Passed', 'Failed', 'Canceled', 'scheduled', 'Incoming']"
+                                :options="['Passed', 'Failed', 'No Show', 'scheduled', 'Incoming']"
                             />
                     </div>
                 </div>
@@ -159,7 +160,7 @@ new class extends Component {
                                     @if ($interviews->status == 'Failed')
                                         <x-badge flat negative label="{{ $interviews->status }}" />
                                     @endif
-                                    @if ($interviews->status == 'Canceled')
+                                    @if ($interviews->status == 'No Show')
                                         <x-badge flat slate label="{{ $interviews->status }}" />
                                     @endif
                                     @if ($interviews->status == 'scheduled')
@@ -231,7 +232,7 @@ new class extends Component {
                                     {{ $interview_status }}
                                 </div>
                             @endif
-                            @if($interview_status == "Canceled")
+                            @if($interview_status == "No Show")
                                 <div class="text-gray-500 ml-10">
                                     {{ $interview_status }}
                                 </div>
@@ -298,7 +299,7 @@ new class extends Component {
                         <div class="flex space-x-3">
                             <x-radio id="color-positive" wire:model="status" label="Passed" positive value="Passed" xl />
                             <x-radio id="color-negative" wire:model="status" label="failed" negative value="Failed" xl />
-                            <x-radio id="color-secondary" wire:model="status" label="canceled" secondary value="Canceled" xl />
+                            <x-radio id="color-secondary" wire:model="status" label="No Show" secondary value="No Show" xl />
                         </div>
                         <div>
                             <x-textarea wire:model='feedback' placeholder="Feedback..." />

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('contact');
             $table->string('job_position');
+            $table->string('salary');
             $table->string('department');
             $table->timestamps();
         });

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('department');
             $table->string('refered_by')->nullable();
             $table->string('job_position');
+            $table->string('salary');
             $table->string('status')->default('applicant');
             $table->string('score')->nullable();
             $table->timestamps();
