@@ -52,6 +52,18 @@ new class extends Component {
         $post->likes++;
         $post->save();
     }
+
+    public function dislikeComment(Comment $comment)
+    {
+        $comment->dislikes++;
+        $comment->save();
+    }
+
+    public function likeComment(Comment $comment)
+    {
+        $comment->likes++;
+        $comment->save();
+    }
     
     public function getPosts()
     {
@@ -127,11 +139,11 @@ new class extends Component {
                     <div class="flex gap-4">
                         <button class="flex items-center gap-1">
                             <x-icon name="hand-thumb-up" solid/> 
-                            <p class="text-sm">69</p>
+                            <p class="text-sm">{{ $likes }}</p>
                         </button>
                         <button class="flex items-center gap-1">
                             <x-icon name="hand-thumb-down" solid/> 
-                            <p class="text-sm">69</p>
+                            <p class="text-sm">{{ $dislikes }}</p>
                         </button>
                     </div>
                 </div>
@@ -152,12 +164,12 @@ new class extends Component {
                         <div class="text-sm py-2 px-5 ">{{ $item->comment }}</div>
                         <div class="flex gap-4">
                             <button class="flex items-center gap-1">
-                                <x-icon name="hand-thumb-up" solid/> 
-                                <p class="text-sm">69</p>
+                                <x-icon name="hand-thumb-up" wire:click='likeComment({{ $item->id }})' solid/> 
+                                <p class="text-sm">{{ $item->likes }}</p>
                             </button>
                             <button class="flex items-center gap-1">
-                                <x-icon name="hand-thumb-down" solid/> 
-                                <p class="text-sm">69</p>
+                                <x-icon name="hand-thumb-down" wire:click='dislikeComment({{ $item->id }})' solid/> 
+                                <p class="text-sm">{{ $item->dislikes }}</p>
                             </button>
                         </div>
                     </div>

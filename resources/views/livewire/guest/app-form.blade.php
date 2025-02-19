@@ -59,6 +59,14 @@ new #[layout('components.usercomponent.appform-layout')]
             'terms' => ['required'],
         ]);
 
+        $failedApplicant = DB::table('failed_applicants')->where('email', $validatedData['email'])->exists();
+        
+        if(!$failedApplicant)
+        {
+            
+       
+        
+
         $pdf = $this->resume->store('resumes', 'public');
         $validatedData['resume'] = $pdf;
         
@@ -87,32 +95,20 @@ new #[layout('components.usercomponent.appform-layout')]
 
         $validatedData['score'] = $num;
 
-        // if($num < 50){
-        //     $applicant = Applicant::create($validatedData);
-        //     $this->dispatch('Application-completed');
-        //     sleep(5);
-        //     $this->redirect('/jobpost', navigate: true);
-        // }else{
-        //     $validatedData['status'] = 'candidate';
-        //     $applicant = Applicant::create($validatedData);
-        //     $this->dispatch('Application-completed');
-        //     sleep(5);
-        //     $this->redirect('/jobpost', navigate: true);
-        // }
-
         if($num >= 50){
             $validatedData['status'] = 'candidate';
         }
 
         $applicant = Applicant::create($validatedData);
-        $this->dispatch('Application-completed');
-        // sleep(5);
-        // $this->redirect('/jobpost', navigate: true);
+        $this->dispatch('ApplicationSuccess');
 
         Mail::to($applicant->email)->send(
             new JobApplied($applicant)
         );
 
+        }else{
+            $this->dispatch('failed-notif');
+        }
 
         
         
@@ -121,9 +117,9 @@ new #[layout('components.usercomponent.appform-layout')]
 }; ?>
 
 <div class="bg-white rounded-xl" x-data="{terms: false}">
-    {{-- <x-notification on="Application-completed" >
-        <x-alert title="Application completed" positive solid />
-    </x-notification> --}}
+    <x-notification on="failed-notif" >
+        <x-alert title="Application Failed" negative solid />
+    </x-notification>
     
     <div class="flex flex-col items-center justify-center h-full p-3 text-md">
         <h1 class="self-center m-0 text-2xl font-bold text-black">Application Form</h1>
@@ -254,7 +250,7 @@ new #[layout('components.usercomponent.appform-layout')]
         </div>
     </form>
 </div>
-<x-stable-notif on="Application-completed" >
+<x-stable-notif on="ApplicationSuccess" >
     <div class="bg-white w-80 lg:w-96  h-80 flex flex-col items-center justify-center gap-7 py-5 text-center rounded-md shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
         <div class=" text-3xl font-bold animate-pulse  text-gray-700  w-36 h-36 rounded-full border-2 border-amber-500 flex justify-center items-center">
             Thanks!

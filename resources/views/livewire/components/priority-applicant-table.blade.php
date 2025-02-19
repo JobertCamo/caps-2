@@ -5,6 +5,7 @@ use App\Models\Applicant;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 new class extends Component {
@@ -16,6 +17,8 @@ new class extends Component {
     public function delete(Applicant $applicant)
     {
         $this->authorize('delete', $applicant);
+
+        $this->failed_applicants($applicant);
 
         $applicant->delete();
         $this->dispatch('delete-notif');
@@ -44,6 +47,23 @@ new class extends Component {
     {
         // return Applicant::latest()->simplePaginate(6);
         return Applicant::where('status', 'candidate')->latest()->simplePaginate(7);
+    }
+
+    public function failed_applicants(Applicant $applicant)
+    {
+        DB::table('failed_applicants')->insert([
+            'first_name' => $applicant->first_name,
+            'middle_name' => $applicant->middle_name,
+            'last_name' => $applicant->last_name,
+            'gender' => $applicant->gender,
+            'email' => $applicant->email,
+            'birth_date' => $applicant->birth_date,
+            'contact' => $applicant->contact,
+            'address' => $applicant->address,
+            'nationality' => $applicant->nationality,
+            'religion' => $applicant->religion,
+            'civil_status' => $applicant->civil_status,
+        ]);
     }
 
 
