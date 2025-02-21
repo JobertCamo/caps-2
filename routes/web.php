@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function() {
     Route::view('/employee-dashboard', 'pages-employee.dashboard')->can('view-page-employee');
     Volt::route('/profile', 'employee.profile')->can('view-page-employee');
     Route::view('/token', 'token')->can('view-page');
+    // Route::view('/employee-task', 'julsfolder.hr-portal');
+    Volt::route('/resignation', 'employee.resignation-form');
 });
 Volt::route('/jobpost', 'guest.job-post');
 // Route::middleware('guest')->group(function() {
@@ -47,7 +49,7 @@ Route::get('/', function () {
     return view('user.login');
 })->name('login');
 
-Route::view('/employee-task', 'julsfolder.hr-portal');
-Volt::route('/resignation', 'employee.resignation-form');
+Route::view('/docs', 'api-docs');
+
 
                      

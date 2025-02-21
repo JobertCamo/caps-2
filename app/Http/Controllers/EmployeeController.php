@@ -13,7 +13,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return EmployeeResource::collection(Employee::all());
+        //return EmployeeResource::collection(Employee::all());
+        return Employee::all();
     }
 
     /**
@@ -29,7 +30,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        return new EmployeeResource($employee);
+        return $employee;
     }
 
     /**
@@ -38,16 +39,16 @@ class EmployeeController extends Controller
     public function update(Employee $employee, Request $request)
     {
         $validatedData = $request->validate([
-            'email' => 'required|email|unique:employees,email',
-            'contact' => 'required|string|max:11',
-            'job_position' => 'required|string|max:255',
-            'salary' => 'required|numeric|max:255',
+            'email' => 'required|email',
+            'contact' => 'required',
+            'job_position' => 'required|max:255',
+            'salary' => 'required',
             'department' => 'required|string|max:255',
         ]);
 
         if(Employee::where('id', $employee->id))
         {
-            $employeeinfo = Employee::findOrFail($employee->id);
+            $employeeinfo = Employee::find($employee->id);
 
             $employeeinfo->update([
                 'email' => $validatedData['email'],
