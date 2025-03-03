@@ -54,4 +54,5 @@ class extends Component {
             </div>
             <x-button type="submit" label="Submit" class="w-full" amber />
     </form>
+    <a href="/resignation" class="mt-5 lg:mt-0 self-end text-sm justify-self-end text-red-500">Resignation Form</a>
 </div>

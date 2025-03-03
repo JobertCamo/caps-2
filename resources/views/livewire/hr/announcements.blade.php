@@ -11,26 +11,28 @@ new class extends Component {
             'announcements' => Announcement::orderBy('created_at', 'desc')->take(3)->get(),
         ];
     }
-    
 }; ?>
 
-<div class="flex flex-col  max-h-[400px] overflow-auto soft-scrollbar p-2">
+<div class=" border-2 border-[#4f200dc5] p-3 overflow-auto soft-scrollbar min-h-[500px] ">
+    <div class="text-xl m-1 font-bold">Announcement</div>
     @forelse ($announcements as $announcement)
-    
-    <div class="card-task"> <!--START TO NG TASK LISTS CARD WALA YANG CLASS NAME LANG HAHA-->
-        <div class="flex items-center ">
-            <div class="w-3 h-3 rounded-full bg-green-500 m-2">
+
+    <div class=" mt-3 ">
+        <div class=" p-3">
+            <div class="flex justify-between">
+                <div class="font-bold text-[#FFD93D] text-lg">{{ $announcement->title }}</div>
+                <x-icon name="ellipsis-horizontal"/>
             </div>
-            <p class="font-semibold text-base">
-                {{ $announcement->title }}
-            </p>
+            <p class="">Description: {{ $announcement->description }}</p>
+            <div class="flex justify-between items-center mt-1 text-sm">
+                <p>{{ $announcement->user->name }}</p>
+                <p>{{ \Carbon\Carbon::parse($announcement->created_at)->diffForHumans() }}</p>
+            </div>
         </div>
-        <p class="indent-5 text-sm">
-            {{ $announcement->description }}
-        </p>
     </div>
-       
+
     @empty
-        
+
     @endforelse
+
 </div>

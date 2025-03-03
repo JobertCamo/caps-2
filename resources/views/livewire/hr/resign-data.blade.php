@@ -61,16 +61,12 @@ new class extends Component {
         <x-input wire:model.live='q' placeholder="Search Name" icon="magnifying-glass" />
         <x-button label="New" amber @click="add = true" />
     </div>
-    <div class="grid lg:grid-cols-3 gap-4">
+    <div class="grid lg:grid-cols-3 gap-3">
         @forelse ($resignees as $resignee)
-        <div class="bg-white lg:max-w-[360px] min-h-64 max-h-64 flex flex-col justify-between py-3 px-4 rounded-xl border-[1px] border-gray-200 shadow-xl">
+        <div class="bg-white lg:max-w-[360px] min-h-28  flex flex-col justify-between py-3 px-4 rounded-xl border-[1px] border-gray-200 shadow-xl">
             <div class="flex justify-between ">
                 <div class="text-2xl font-bold">{{ $resignee->name }}</div>
                 <button wire:click='update({{ $resignee->id }})' @click="open = true" class="bg-gray-400/50 hover:bg-gray-400 rounded-full text-xs px-2">More Details</button>
-            </div>
-            <div class="space-y-3 mb-2">
-                <div class="text-md font-bold text-gray-600">Resignation Details</div>
-                <p class="text-sm text-gray-500">{{ $resignee->reason }}</p>
             </div>
             <div class="flex justify-between">
                 <div class="font-bold text-red-600">{{ $resignee->created_at->format('F d Y') }}</div>
@@ -80,6 +76,43 @@ new class extends Component {
         @empty
             <div>No Data Found.</div>
         @endforelse
+
+
+        {{-- <table class=" min-w-full ">
+            <thead class="sticky top-0">
+                <tr class="bg-gradient-to-r from-yellow-300 to-amber-400">
+                    <th scope="col" class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">
+                        Name
+                    </th>
+                    <th scope="col" class="p-5 text-center text-sm leading-6 font-semibold text-gray-900 capitalize">
+                        Email
+                    </th>
+                    <th scope="col" class="p-5 text-center text-sm leading-6 font-semibold text-gray-900 capitalize">
+                        Job Position
+                    </th>
+                    <th scope="col" class="p-5 text-center text-sm leading-6 font-semibold text-gray-900 capitalize">
+                        Department
+                    </th>
+                    <th scope="col" class="p-5 text-sm leading-6 font-semibold text-gray-900 capitalize text-center">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-300 text-center">
+                @foreach ($resignees as $resignee)
+                <tr class="bg-white transition-all duration-500 hover:bg-gray-50">
+                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 text-start">{{ $resignee->name}}</td>
+                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900"> {{ $resignee->email }} </td>
+                    <td class="p-5 whitespace-nowrap  text-sm leading-6 font-medium text-gray-900">{{$resignee->job_position}}</td>
+                    <td class="p-5 whitespace-nowrap  text-sm leading-6 font-medium text-gray-900">{{$resignee->department}}</td>
+                    <td class="p-5 whitespace-nowrap  text-sm leading-6 font-medium text-gray-900"><button wire:click='update({{ $resignee->id }})' @click="open = true" class="bg-gray-400/50 hover:bg-gray-400 rounded-full text-xs px-2">More Details</button></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table> --}}
+        
+        
+        
     </div>
     <div x-cloak x-transition x-show="open" class="absolute inset-0 z-10 flex items-center justify-center bg-black/40">
         <div @click.away="open = false" class="modal-add2 mt-20 flex justify-center items-center p-3 rounded-2xl">

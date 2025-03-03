@@ -7,11 +7,12 @@
             </div>
         </div>
 
-        <div class="bg-white  px-3 pb-4 pt-2 rounded-lg shadow-lg">
+        <div class=" p-3 shadow-lg min-h-32 rounded-lg bg-[#FFD93D] ">
             <livewire:hr.offboarding-schedule />
-            
         </div>
-        
+
+
+
        <livewire:hr.resign-data />
 
         <div x-cloak x-transition x-show="add" class="fixed inset-0 z-10 flex items-center justify-center bg-black/40">
@@ -22,11 +23,11 @@
             </div>
         </div>
         {{--  --}}
-        
-        
+
+
     </div>
 
-    
 
-    
+
+
 </x-layout>

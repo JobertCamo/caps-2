@@ -2,8 +2,13 @@
 
 use App\Models\UserTask;
 use Livewire\Volt\Component;
+use Illuminate\Validation\Rules\File;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 new class extends Component {
+    use WithFileUploads;
+    
     public $task;
     public $file;
     public $date_completed;
@@ -12,13 +17,20 @@ new class extends Component {
     {
         $this->validate([
             'date_completed' => ['required'],
+            'file' => ['required', File::types(['pdf','png','jpeg','jpg'])],
         ]);
+
+        $file = $this->file->store('tasks', 'public');
+
+        $filePath = url('/') . '/' . 'storage' . '/' . $file;
 
         UserTask::create([
             'user_id' => $this->task->user_id,
+            'name' => Auth::user()->name,
             'title' => $this->task->title,
             'task_description' => $this->task->description,
             'date_completed' => $this->date_completed,
+            'file' => $filePath,
         ]);
 
         $this->task->delete();
@@ -49,7 +61,7 @@ new class extends Component {
                 placeholder="Date Completed"
                 errorless
             />
-            <x-input type="file" label="Proof ex. image" class="" />
+            <x-input wire:model='file' type="file" label="Proof ex. image" class="" />
         </div>
         <div class="w-full mt-5">
             <x-button type="submit" label="Mark as Done" class="w-full" amber />

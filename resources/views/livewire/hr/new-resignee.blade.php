@@ -16,7 +16,7 @@ new class extends Component {
     public $name;
     public $contact;
     public $department;
-    public $email;
+    public $email = null;
     public $job_position;
     public $reason;
     public $file;
@@ -24,16 +24,18 @@ new class extends Component {
     public function submit()
     {
         $data = $this->validate([
-            'contact' => ['required'],
+            // 'contact' => ['required'],
             'job_position' => ['required'],
             'reason' => ['required'],
-            'file' => ['required', File::types(['pdf'])],
+            // 'file' => ['required', File::types(['pdf'])],
         ]);
         $data['user_id'] = $this->selectedUser;
         $data['name'] = $this->name;
         $data['email'] = $this->email;
         $data['department'] = $this->department;
-        $data['file'] = $this->file->store('resignations', 'public');
+        // $data['file'] = $this->file->store('resignations', 'public');
+        $data['contact'] = "N/A";
+        $data['file'] = "N/A";
         Resignation::create($data);
         $this->redirect('/offboarding');
     }
@@ -42,6 +44,7 @@ new class extends Component {
     {
         $data = User::find($this->selectedUser);
         $this->email = $data->email;
+        // $this->contact = $data->email;
         $this->name = $data->name;
         $this->department = $data->department;
     }
@@ -63,17 +66,18 @@ new class extends Component {
                     <div class="">
                         <label for="" class="">Employee Name</label>
                         <select wire:model.live='selectedUser' placeholder="Select name" class="border-[1px] border-gray-300 rounded-md p-2 shadow-sm w-full">
+                            <option value="">Select Employee</option>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
                         
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
+                    <div class="grid grid-cols-1  gap-4">
+                        {{-- <div>
                             <label class="block text-gray-700 text-sm font-medium mb-1">Contact</label>
                             <x-input class="" wire:model.live='contact' />
-                        </div>
+                        </div> --}}
                         <div>
                             <label class="block text-gray-700 text-sm font-medium mb-1">Job Type</label>
                             <x-input class="" wire:model.live='job_position'/>
@@ -81,16 +85,16 @@ new class extends Component {
                     </div>
                     <div>
                         <label class="block text-gray-700 text-sm font-medium mb-1">Email</label>
-                        <x-input type="text" class="" wire:model.live='email'/>
+                        <x-input type="text" class="" wire:model.live='email' readonly/>
                     </div>
                     <div>
                         <label class="block text-gray-700 text-sm font-medium mb-1">Reason</label>
                         <x-textarea type="text"  wire:model.live='reason'/>
                     </div>
-                    <div>
+                    {{-- <div>
                         <label class="block text-white text-sm font-medium mb-1">Resignation letter</label>
                         <x-input type="file" class="" wire:model.live='file'/>
-                    </div>
+                    </div> --}}
             </div>
         </div>
     </fieldset>

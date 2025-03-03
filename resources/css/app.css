@@ -173,3 +173,27 @@ progress {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(79, 32, 13, 0.918);
+    position: absolute;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    left: 40%;
+    padding: 2px;
+    color: #FFD93D;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

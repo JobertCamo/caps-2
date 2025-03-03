@@ -82,14 +82,24 @@ new #[layout('components.usercomponent.appform-layout')]
 
         $requirements = $this->job->requirements;
 
-        $res = "can you analyze this resume and check the skills that this resume has
-              " .$text . " and analyze if the skills are fit and match with" . $requirements ." 
-             and give me the percentage of the skills matches only the number of percentage. just give me a
-              number of percentage of your calculation please and dont say any explanation I just need the number I dont need any explanation or label";
+        $res = "Analyze the following resume skills:
+              " .$text . " Compare them with the job requirements: " . $requirements ." 
+             Calculate the percentage match between the skills and requirements. Return **only the percentage as a number**, without any explanation, labels, or extra text.";
 
-        $result = Gemini::geminiPro()->generateContent($res);
+        // $result = Gemini::geminiPro()->generateContent($res);
 
-        $result2 = $result->text();
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post("https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent", [
+            'query' => ['key' => 'AIzaSyAFvDKsq3H1Qbkj2iyWR7QPGNEdlHY0clk'],
+            'json' => ['contents' => [['parts' => [['text' => $res]]]]],
+            'timeout' => 30,
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        $result2 = $data['candidates'][0]['content']['parts'][0]['text'] ?? 'No response';
+
+        // $result2 = $result->text();
 
         $num = Str::remove('%',$result2);
 

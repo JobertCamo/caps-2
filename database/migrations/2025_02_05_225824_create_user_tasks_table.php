@@ -15,9 +15,11 @@ return new class extends Migration
         Schema::create('completed_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
+            $table->string('name');
             $table->string('title');
             $table->string('task_description');
             $table->dateTime('date_completed');
+            $table->dateTime('file')->nullable();
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class extends Component {
     public $results;
     public $q = '';
     public $qr = [];
-    public $link = true;
+    // public $link = true;
     public $searchBar = true;
     public $tag;
 
@@ -35,13 +35,28 @@ class extends Component {
         $this->tag = $tag->name;
     }
 
-    public function search($q)
+    public function updatingQ()
     {
-        $jobs = Job::where('title', 'LIKE', '%'.$this->q.'%')
-                    ->orWhere('location', 'LIKE', '%'.$this->q.'%')
-                    ->orWhere('schedule', 'LIKE', '%'.$this->q.'%')
-                    ->get();
-        $this->link = false;
+        $this->resetPage();
+    }
+
+    public function search()
+    {
+        // $jobs = Job::where('title', 'LIKE', '%'.$this->q.'%')
+        //             ->orWhere('location', 'LIKE', '%'.$this->q.'%')
+        //             ->orWhere('schedule', 'LIKE', '%'.$this->q.'%')
+        //             ->get();
+
+                    $jobs = Job::where('status', 'published') // Ensure only published jobs are retrieved
+                        ->where(function ($query) {
+                        $query->where('title', 'LIKE', '%'.$this->q.'%')
+                            ->orWhere('location', 'LIKE', '%'.$this->q.'%')
+                            ->orWhere('schedule', 'LIKE', '%'.$this->q.'%');
+                    })
+                    ->latest()
+                    ->simplepaginate(5);
+                    
+        // $this->link = false;
         return $jobs;
     }
 
@@ -55,9 +70,9 @@ class extends Component {
 
     public function with(): Array
     {
-        !empty($this->q) ? $jobs = $this->search($this->q) : $jobs = $this->getJob();
+        // !empty($this->q) ? $jobs = $this->search($this->q) : $jobs = $this->getJob();
         return [
-            'jobs' => $jobs,
+            'jobs' => $this->search(),
             'firstJob' => Job::first(),
         ];
 
@@ -105,9 +120,9 @@ class extends Component {
                 @foreach ($jobs as $job)
                     <x-job-card :$job></x-job-card>
                 @endforeach
-                @if($link)
+                {{-- @if($link) --}}
                     <div>{{ $jobs->links(data: ['scrollTo' => false]) }}</div>
-                @endif
+                {{-- @endif --}}
             @endif
         </div>
         

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('role');
             $table->string('department');
+            $table->string('external_user_id')->unique();
             $table->string('profile_picture')->default('profiles/sqaure.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -17,6 +17,21 @@ new class extends Component {
             ->paginate(8);
     }
 
+    public function publish(Job $job)
+    {
+        // dd($job);
+        $job->update([
+            'status' => 'published'
+        ]);
+    }
+    public function unpublish(Job $job)
+    {
+        // dd($job);
+        $job->update([
+            'status' => 'private'
+        ]);
+    }
+
     public function delete(Job $job)
     {
         $job->delete();
@@ -50,9 +65,15 @@ new class extends Component {
             <div class="bg-white shadow-lg rounded-lg overflow-hidden border-[1px] flex flex-col justify-between border-gray-200 min-h-[220px]">
                 <div class="flex justify-between items-center px-1 border-b-[1px] border-gray-300">
                     <div class="p-2 font-bold lg:text-md">{{ $job->title }}</div>
-                    <div class="flex items-center gap-1" x-data="{del: false}">
-                        <a href="/edit-job/{{ $job->id }}"><x-icon name="pencil-square" color="blue" solid /></a>
-                        <button><x-icon name="trash" solid color="red" @click="del = true" /></button>
+                    <div class="flex items-center gap-4 relative" x-data="{del: false, pub: false}">
+                        {{-- <a href="/edit-job/{{ $job->id }}"><x-icon name="pencil-square" color="blue" solid /></a> --}}
+                        <button @click="pub = true"><x-icon name="ellipsis-vertical" /></button>
+                        <div x-show="pub" @click.away="pub = false" class="absolute top-7 right-7 bg-white shadow-xl px-3 border-[1px] border-gray-500 rounded-md">
+                            <button class="hover:text-green-700" wire:click='publish({{ $job->id }})'>Publish</button>
+                            <button class="hover:text-gray-600" wire:click='unpublish({{ $job->id }})'>Unpublish</button>
+                            <button class="hover:text-red-500" @click="del = true">Delete</button>
+                        </div>
+                        {{-- <button><x-icon name="trash" solid color="red" @click="del = true" /></button> --}}
                         <div x-show="del" x-cloak class="px-2 md:px-0 transition-all duration-300 flex h-screen w-full bg-black/20 fixed top-0 left-0 z-50  justify-center items-center">
                             <div class="bg-white text-center p-5 space-y-4">
                                 <div class="text-xl">Confirm Delete?</div>
@@ -68,8 +89,14 @@ new class extends Component {
                     {{ $job->description }}
                 </div>
                 <div class="flex justify-between p-2 border-t-[1px] border-gray-300 text-sm">
-                    <div>Quezon City</div>
-                    <div>30,000PHP</div>
+                    <div>{{ $job->location }}</div>
+                    <div>{{ $job->salary }}</div>
+                    @if (Str::lower($job->status) === "published")
+                        <div class="text-xs text-green-500">{{ $job->status }}</div>
+                    @else
+                        <div class="text-xs text-gray-500">{{ $job->status }}</div>
+                    @endif
+                    
                 </div>
             </div>
         @empty

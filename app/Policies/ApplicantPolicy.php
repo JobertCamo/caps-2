@@ -37,7 +37,7 @@ class ApplicantPolicy
      */
     public function update(User $user): bool
     {
-        return $user->role === 'hr';
+        return $user->role === 'HR';
     }
 
     /**
@@ -45,7 +45,7 @@ class ApplicantPolicy
      */
     public function delete(User $user, Applicant $applicant): bool
     {
-        return $user->role === "hr" && is_null($applicant->user_id);
+        return $user->role === "HR" && is_null($applicant->user_id);
     }
 
     /**

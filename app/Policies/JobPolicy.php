@@ -29,7 +29,7 @@ class JobPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'hr';
+        return $user->role === 'HR';
     }
 
     /**

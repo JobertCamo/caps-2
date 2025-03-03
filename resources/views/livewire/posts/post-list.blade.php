@@ -5,7 +5,7 @@ use App\Models\Comment;
 use Livewire\Volt\Component;
 
 new class extends Component {
-    
+
     public $postID;
     public $postdetail;
     public $likes;
@@ -40,7 +40,7 @@ new class extends Component {
         $this->dislikes = $post->dislikes;
         $this->comments = $comment->comment;
     }
-    
+
     public function dislikePost(Post $post)
     {
         $post->dislikes++;
@@ -64,7 +64,7 @@ new class extends Component {
         $comment->likes++;
         $comment->save();
     }
-    
+
     public function getPosts()
     {
         return Post::with('comments')->latest()->paginate($this->paginate);
@@ -84,13 +84,13 @@ new class extends Component {
             'taes' => Comment::where('post_id', $id)->latest()->paginate(10),
         ];
     }
-    
+
 }; ?>
 
-<div class="mt-5 overflow-auto w-full">
+<div class=" overflow-auto w-full ">
     @forelse ($posts as $post)
-     
-    <div class="bg-slate-200 w-full flex flex-col p-3 mt-5">
+
+    <div class=" shadow-lg border-b-2 border-[#787878]  w-full flex flex-col p-3  bg-[#F6F1E9]">
         <div class="flex gap-2 items-center">
             <img class="rounded-full" src="{{ asset('images/sqaure.png') }}" width="30px" alt="">
             <div class="block">
@@ -103,18 +103,18 @@ new class extends Component {
                 <p class="text-xs">{{ $post->created_at->setTimezone('Asia/Manila')->format('F d, Y - h:i A') }}</p>
             </div>
         </div>
-        <div class="text-sm py-2 px-5 ">{{$post->post}}</div>
+        <div class="text-sm py-2 px-5 break-words ">{{$post->post}}</div>
         <div class="flex gap-4">
             <button class="flex items-center gap-1">
-                <x-icon wire:click='likePost({{ $post->id }})' name="hand-thumb-up" solid/> 
+                <x-icon wire:click='likePost({{ $post->id }})' name="hand-thumb-up" solid/>
                 <p class="text-sm">{{ $post->likes }}</p>
             </button>
             <button class="flex items-center gap-1">
-                <x-icon wire:click='dislikePost({{ $post->id }})' name="hand-thumb-down" solid/> 
+                <x-icon wire:click='dislikePost({{ $post->id }})' name="hand-thumb-down" solid/>
                 <p class="text-sm">{{ $post->dislikes }}</p>
             </button>
             <button @click="comment = true"  class="flex items-center gap-1">
-                <x-icon wire:click="update({{ $post->id }},{{ optional($post->comments->first())->id ?? '' }})" name="chat-bubble-bottom-center-text" solid/> 
+                <x-icon wire:click="update({{ $post->id }},{{ optional($post->comments->first())->id ?? '' }})" name="chat-bubble-bottom-center-text" solid/>
             </button>
         </div>
     </div>
@@ -138,11 +138,11 @@ new class extends Component {
                     <div class="text-sm py-2 px-5 ">{{$postdetail}}</div>
                     <div class="flex gap-4">
                         <button class="flex items-center gap-1">
-                            <x-icon name="hand-thumb-up" solid/> 
+                            <x-icon name="hand-thumb-up" solid/>
                             <p class="text-sm">{{ $likes }}</p>
                         </button>
                         <button class="flex items-center gap-1">
-                            <x-icon name="hand-thumb-down" solid/> 
+                            <x-icon name="hand-thumb-down" solid/>
                             <p class="text-sm">{{ $dislikes }}</p>
                         </button>
                     </div>
@@ -164,21 +164,21 @@ new class extends Component {
                         <div class="text-sm py-2 px-5 ">{{ $item->comment }}</div>
                         <div class="flex gap-4">
                             <button class="flex items-center gap-1">
-                                <x-icon name="hand-thumb-up" wire:click='likeComment({{ $item->id }})' solid/> 
+                                <x-icon name="hand-thumb-up" wire:click='likeComment({{ $item->id }})' solid/>
                                 <p class="text-sm">{{ $item->likes }}</p>
                             </button>
                             <button class="flex items-center gap-1">
-                                <x-icon name="hand-thumb-down" wire:click='dislikeComment({{ $item->id }})' solid/> 
+                                <x-icon name="hand-thumb-down" wire:click='dislikeComment({{ $item->id }})' solid/>
                                 <p class="text-sm">{{ $item->dislikes }}</p>
                             </button>
                         </div>
                     </div>
                     @empty
-                        
+
                     @endforelse
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>

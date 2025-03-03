@@ -74,23 +74,8 @@
                 </div>
             </div>
             <div class="bg-white lg:col-span-2 h-[100%] flex flex-col shadow-md rounded-lg lg:max-h-[508px] xl:max-h-[768px] overflow-y-scroll scrollbar-hidden">
-                <div class="p-3 grid grid-cols-2 gap-3">
-                    <div class="bg-gradient-to-r from-indigo-300 to-indigo-600 rounded-lg p-2 space-y-3 text-white">
-                        <div class="flex justify-between">
-                            <div>Task Completed</div>
-                            <x-icon name="rectangle-stack" />
-                        </div>
-                        <div class="text-2xl">5/10</div>
-                    </div>
-                    <div class="bg-gradient-to-r from-sky-400 to-sky-600 rounded-lg p-2 space-y-3 text-white">
-                        <div class="flex justify-between">
-                            <div>Task Completed</div>
-                            <x-icon name="rectangle-stack" />
-                        </div>
-                        <div class="text-2xl">5/10</div>
-                    </div>
-                    
-                </div>
+                <livewire:employee.task-stats-right />
+                
                 <livewire:employee.announcements />
             </div>
         </div>

@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -12,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->id('id');
-            // $table->foreignIdFor(User::class);
+        Schema::create('job_posts', function (Blueprint $table) {
+            $table->id();
             $table->string('title');
             $table->text('description');
             $table->text('requirements');
@@ -22,6 +20,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('schedule')->default('Full Time');
             $table->string('department');
+            $table->string('tag');
             $table->string('status')->default('pending');
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('job_posts');
     }
 };

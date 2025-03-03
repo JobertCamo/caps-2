@@ -144,11 +144,11 @@
                                 Freedom Wall
                             </a>
                         </li>
-                        <li class="side">
+                        {{-- <li class="side">
                             <a wire:navigate href="/resignation" class="{{ request()->is('resignation') ? 'bg-amber-200 font-bold' : '' }}">
                                 Resignation
                             </a>
-                        </li>
+                        </li> --}}
                         @endcannot
                         
                         {{-- <label for="EMPLOYEE ENGANEMENT" class="titlesidebar">
@@ -281,7 +281,7 @@
                         @cannot('view-page')
                             <li class="side"><a wire:navigate  href="/employee-dashboard">Dashboard</a></li>
                             <li class="side"><a wire:navigate  href="/wall">Freedom Wall</a></li>
-                            <li class="side"><a wire:navigate  href="/resignation">Resignation</a></li>
+                            {{-- <li class="side"><a wire:navigate  href="/resignation">Resignation</a></li> --}}
                         @endcannot
                     </ul>
                 </div>

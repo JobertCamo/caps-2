@@ -8,7 +8,7 @@
             <img src="{{ Asset('images/jobs.svg') }}" alt="" width="400px" class="drop-shadow-2xl">
         </div>
     </div>
-    <div class="py-2 w-[80%] mx-auto mt-4 text-center text-black flex justify-center overflow-scroll no-scrollbar gap-7">
+    {{-- <div class="py-2 w-[80%] mx-auto mt-4 text-center text-black flex justify-center overflow-scroll no-scrollbar gap-7">
         <x-button right-icon="arrow-right" amber outline rounded label="Frontend" />
         <x-button right-icon="arrow-right" amber outline rounded label="Backend" />
         <x-button right-icon="arrow-right" amber outline rounded label="UI/UX" />
@@ -16,5 +16,5 @@
         <x-button right-icon="arrow-right" amber outline rounded label="Designer" />
         <x-button right-icon="arrow-right" amber outline rounded label="Fullstack" />
         <x-button right-icon="arrow-right" amber outline rounded label="Halfstack" />
-    </div>
+    </div> --}}
 </div>
