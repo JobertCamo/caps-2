@@ -10,12 +10,12 @@
                 <div class="bg-white px-3 pt-3 shadow-md rounded-lg space-y-3 border-2 border-[#4f200dc5]">
                     <livewire:employee.user-info />
                     <div class="text-center text-sm bg-[#4F200D] text-[#F6F1E9] py-1 rounded-md">
-                        <a href="/profile">View Profile</a>
+                        <a href="/profile-edit/{{ Auth::user()->id }}">View Profile</a>
                     </div>
                     <div class="flex justify-between ">
                         <button @click="nav = 'home'" :class="nav === 'home' ? 'border-b-2 border-amber-500 text-amber-500 font-bold' : 'text-gray-500'" class="p-2">Task List</button>
                         <button @click="nav = 'posts'" :class="nav === 'posts' ? 'border-b-2 border-amber-500 text-amber-500 font-bold' : 'text-gray-500'" class="p-2">Composed</button>
-                        <button @click="nav = 'failedTask'" :class="nav === 'failedTask' ? 'border-b-2 border-amber-500 text-amber-500 font-bold' : 'text-gray-500'" class="p-2">Failed Tasks</button>
+                        {{-- <button @click="nav = 'failedTask'" :class="nav === 'failedTask' ? 'border-b-2 border-amber-500 text-amber-500 font-bold' : 'text-gray-500'" class="p-2">Failed Tasks</button> --}}
                     </div>
                 </div>
                 <div class="space-y-4 " x-show="nav === 'home'">
@@ -89,7 +89,7 @@
             </div>
         </div>
 {{-- yung modal dito naka js--}}
-        <p id="ask" class=" hover:underline"> Would you want to Resign?</p>
+        {{-- <p id="ask" class=" hover:underline"> Would you want to Resign?</p> --}}
         <div class="w-full h-screen flex  items-center justify-center top-0  absolute hidden" id="question">
             <div class="bg-white flex-flex-col lg:left-[450px] -translate-x-2 absolute max-w-[450px] max-h-[500px] overflow-auto p-5 border-2 border-[#4F200D] rounded-lg" >
                 <p class="w-fit text-[#4F200D] hover:bg-[#FFD93D] rounded-full duration-400 transition-all"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

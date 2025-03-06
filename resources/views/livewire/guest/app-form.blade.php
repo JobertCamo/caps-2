@@ -44,7 +44,7 @@ new #[layout('components.usercomponent.appform-layout')]
 
         $validatedData = $this->validate([
             'first_name' => ['required','min:2'],
-            'middle_name' => ['required'],
+            'middle_name' => ['nullable'],
             'last_name' => ['required','min:2'],
             'email' => ['required','email','unique:applicants,email'],
             'gender' => ['required'],
@@ -82,9 +82,26 @@ new #[layout('components.usercomponent.appform-layout')]
 
         $requirements = $this->job->requirements;
 
+        // $res = "Analyze the following resume skills:
+        //       " .$text . " Compare them with the job requirements: " . $requirements ." 
+        //      Calculate the percentage match between the skills and requirements. Return **only the percentage as a number**, without any explanation, labels, or extra text.";
+
+        // // $result = Gemini::geminiPro()->generateContent($res);
+
+        // $client = new \GuzzleHttp\Client();
+        // $response = $client->post("https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent", [
+        //     'query' => ['key' => 'AIzaSyAFvDKsq3H1Qbkj2iyWR7QPGNEdlHY0clk'],
+        //     'json' => ['contents' => [['parts' => [['text' => $res]]]]],
+        //     'timeout' => 30,
+        // ]);
+
+        // $data = json_decode($response->getBody(), true);
+
+        // $result2 = $data['candidates'][0]['content']['parts'][0]['text'] ?? 'No response';
+
         $res = "Analyze the following resume skills:
               " .$text . " Compare them with the job requirements: " . $requirements ." 
-             Calculate the percentage match between the skills and requirements. Return **only the percentage as a number**, without any explanation, labels, or extra text.";
+             Calculate the percentage match between the skills and requirements. Return your evaluation summarize you evaluation make it short and *put the percentage number at the end of your sentence just like this 'the percentage is percentage_number' dont add percentage sign*";
 
         // $result = Gemini::geminiPro()->generateContent($res);
 
@@ -99,13 +116,31 @@ new #[layout('components.usercomponent.appform-layout')]
 
         $result2 = $data['candidates'][0]['content']['parts'][0]['text'] ?? 'No response';
 
+
+        $res2 = "can you extract the evaluation percentage result in this" . $result2 . "*return only the number*";
+
+        // $result = Gemini::geminiPro()->generateContent($res);
+
+        $client = new \GuzzleHttp\Client();
+        $response2 = $client->post("https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent", [
+            'query' => ['key' => 'AIzaSyAFvDKsq3H1Qbkj2iyWR7QPGNEdlHY0clk'],
+            'json' => ['contents' => [['parts' => [['text' => $res2]]]]],
+            'timeout' => 30,
+        ]);
+
+        $data2 = json_decode($response2->getBody(), true);
+
+        $result3 = $data2['candidates'][0]['content']['parts'][0]['text'] ?? 'No response';
+
         // $result2 = $result->text();
+        // preg_match('/\d+$/', $result2, $matches);
+        // $number = $matches[0] ?? null;
+        // $num = Str::remove('%',$result2);
+        
+        $validatedData['score'] = $result3;
+        $validatedData['evaluation'] = $result2;
 
-        $num = Str::remove('%',$result2);
-
-        $validatedData['score'] = $num;
-
-        if($num >= 50){
+        if($result3 >= 50){
             $validatedData['status'] = 'candidate';
         }
 
@@ -145,7 +180,7 @@ new #[layout('components.usercomponent.appform-layout')]
                             <x-input-error name="first_name" />
                         </div>
                         <div>
-                            <label for="middle_name">Middle Name</label>
+                            <label for="middle_name">Middle Name <span class="text-xs">(optional)</span></label>
                             <input wire:model="middle_name" type="text" id="middle_name" name="middle_name" class="inputs w-[50%]" placeholder="Middle Name" />
                             <x-input-error name="middle_name" />
                         </div>

@@ -33,6 +33,7 @@ new class extends Component {
 
         $resignation->delete();
         $this->dispatch('resignation approved');
+        $this->redirect('/offboarding');
 
     }
 

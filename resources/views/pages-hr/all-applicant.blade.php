@@ -10,9 +10,7 @@
             <div class="flex w-full lg:flex-row h-full flex-col">
                 <livewire:components.stats />
                 <div class="lg:w-[50%] flex flex-col items-center justify-center -z-10">
-                    <div shadow="xl" class="w-[95%] lg:w-[95%] md:h-[100%] md:w-fit sm:w-[90%] m-2 bg-white/80 rounded-xl drop-shadow-lg text-black p-2">
-                        <x-line-chart />
-                    </div>
+                    <livewire:hr.chart />
                 </div>
             </div>
         </div>

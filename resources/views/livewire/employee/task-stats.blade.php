@@ -15,7 +15,7 @@ new class extends Component {
     
 }; ?>
 
-<div class="grid grid-cols-3 gap-5 px-3">
+<div class="grid grid-cols-2 gap-5 px-3">
     <div class="bg-white px-3 py-1 shadow-lg rounded-lg">
         <li class="list-none text-sm">Completed Task</li>
         <li class="-mt-1 list-none font-bold text-lg">{{ count($complete) }}</li>
@@ -24,8 +24,8 @@ new class extends Component {
         <li class="list-none text-sm">Incomplete Task</li>
         <li class="-mt-1 list-none font-bold text-lg">{{ count($incomplete) }}</li>
     </div>
-    <div class="bg-white px-3 py-1 shadow-lg rounded-lg">
+    {{-- <div class="bg-white px-3 py-1 shadow-lg rounded-lg">
         <li class="list-none text-sm">Failed Task</li>
         <li class="-mt-1 list-none font-bold text-lg">69</li>
-    </div>
+    </div> --}}
 </div>

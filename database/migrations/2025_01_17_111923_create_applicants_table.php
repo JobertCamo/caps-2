@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
-            $table->string('middle_name');
+            $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('gender');
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('job_position');
             $table->string('salary');
             $table->string('status')->default('applicant');
+            $table->string('evaluation')->nullable();
             $table->string('score')->nullable();
             $table->timestamps();
         });

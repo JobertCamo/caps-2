@@ -20,15 +20,15 @@
                 </ul>
             </div>
             <div class="flex items-center space-x-3">
-                <div>
+                {{-- <div>
                     <x-icon name="bell-alert" class="size-6 shrink-0"/>
-                </div>
+                </div> --}}
                 <div x-data="{profileDropdown: false}" class="">
                     <img @click="profileDropdown = true" src="{{ 'storage/' . Auth::user()->profile_picture }}" alt="" class="rounded-full w-9">
                     <div x-show="profileDropdown" x-transition x-cloak class=" absolute -bottom-[5em] right-2 px-5 py-3 bg-white rounded-md">
                         <div @click.away="profileDropdown = false" class="">
                             <ul class="space-y-2">
-                                <li><a wire:navigate  class="flex gap-1" href="/profile">Profile<x-icon name="user" class="w-4"/></a></li>
+                                <li><a wire:navigate  class="flex gap-1" href="/profile-edit/{{ Auth::user()->id }}">Profile<x-icon name="user" class="w-4"/></a></li>
                                 <li>
                                     <form action="/logout" method="POST">
                                         @csrf

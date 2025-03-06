@@ -73,7 +73,7 @@ class extends Component {
         // !empty($this->q) ? $jobs = $this->search($this->q) : $jobs = $this->getJob();
         return [
             'jobs' => $this->search(),
-            'firstJob' => Job::first(),
+            'firstJob' => Job::where('status', 'published')->first(),
         ];
 
     }

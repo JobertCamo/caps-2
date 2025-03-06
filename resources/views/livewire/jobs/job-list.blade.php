@@ -57,8 +57,8 @@ new class extends Component {
             <x-input wire:model.live='q' icon="magnifying-glass" placeholder="Search Job Title" />
             <x-checkbox warning sm id="rounded-md" wire:model.live="alphabetical" rounded="base" label="Alphabetical" md />
         </div>
-        <x-button class="hidden md:block" label="Post Job" rounded amber @click=" jobCreate = true " />
-        <x-button class="block md:hidden" label="+" rounded amber @click=" jobCreate = true " />
+        {{-- <x-button class="hidden md:block" label="Post Job" rounded amber @click=" jobCreate = true " /> --}}
+        {{-- <x-button class="block md:hidden" label="+" rounded amber @click=" jobCreate = true " /> --}}
     </div>
     <div class="grid lg:grid lg:grid-cols-4 gap-5">
         @forelse ($jobs as $job)

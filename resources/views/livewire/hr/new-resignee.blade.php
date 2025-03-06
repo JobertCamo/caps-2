@@ -52,7 +52,7 @@ new class extends Component {
     public function with()
     {
         return [
-            'users' => User::all(),
+            'users' => User::where('role', 'Employee')->get(),
         ];
     }
     

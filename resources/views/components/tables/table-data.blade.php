@@ -4,17 +4,17 @@
     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900"> {{ $applicant->contact }} </td>
     <td class="p-5 whitespace-nowrap  text-sm leading-6 font-medium text-gray-900">{{$applicant->email}}</td>
     <td class="p-5 whitespace-nowrap  text-sm leading-6 font-medium text-gray-900">{{$applicant->job_position}}</td>
-    <td>
-        <div class="w-full max-w-xl flex items-center space-x-2 ">
+    {{-- <td>
+        <div class="w-full max-w-xl grid grid-cols-2 space-x-2 ">
             <p class=" text-sm text-gray-700" id="score-display">{{ $applicant->score . '%' }}</p>
             <!-- Progress Bar -->
             <div class="w-full bg-gray-200 rounded-full h-2.5">
-            <div id="progress" class="bg-indigo-600 h-2.5 rounded-full w-[{{ $applicant->score . '%' }}]">
-                
+            <div id="progress" class=" h-2.5 rounded-full" style="width: {{ trim($applicant->score) }}%; background-color:{{ $applicant->score > 50 ? 'green' : 'red' }};">
             </div>
+                
         </div>
             <!-- Score Display -->
-    </td>
+    </td> --}}
     <td class=" p-5" x-data="{delModal: false}">
         {{--  --}}
         <div x-data="{dpdown: false}" class="relative">
@@ -22,6 +22,7 @@
             <div x-show="dpdown" x-transition x-cloak class="text-black/70 roboto-slab w-40 select-none z-10 absolute -left-20 bg-white shadow-2xl border-solid border-[1px] border-black/15 px-1 py-1 rounded-md">
                 <div @click.away="dpdown = false" class="flex flex-col text-start space-y-2">
                     <a wire:navigate.hover href="/profile/{{ $applicant->id }}" class="cursor-pointer hover:bg-black/5 rounded-sm px-2">View Profile</a>
+                    {{-- <a wire:click='updated({{ $applicant->evaluation }})' class="cursor-pointer hover:bg-black/5 rounded-sm px-2">Evaluation</a>{{ $evaluation }} --}}
                     <a wire:navigate.hover @click="delModal = true" class="cursor-pointer hover:bg-black/5 rounded-sm px-2" >Delete</a>
                 </div>
             </div>

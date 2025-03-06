@@ -7,8 +7,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "gemini-api-php/laravel": "^0.3.0",
-        "google-gemini-php/laravel": "^1.0",
         "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",

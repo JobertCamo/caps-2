@@ -2,6 +2,8 @@
 
 use App\Models\Resignation;
 use Livewire\Volt\Component;
+use App\Mail\ResignationInterview;
+use Illuminate\Support\Facades\Mail;
 
 new class extends Component {
 
@@ -27,6 +29,11 @@ new class extends Component {
             'schedule' => $data['schedule'],
             'status' => $data['status'],
         ]);
+
+        Mail::to($reisg->email)->send(
+            new ResignationInterview($reisg->name, $reisg->schedule)
+        );
+
         $this->redirect('/offboarding');
     }
 
@@ -59,7 +66,7 @@ new class extends Component {
 <div class="space-y-4 bg-white px-4 py-6 rounded-lg">
     <div class="flex items-center gap-3 bg-slate-100 py-2 px-2 border-[1px] border-gray-200 rounded-xl">
         <x-input wire:model.live='q' placeholder="Search Name" icon="magnifying-glass" />
-        <x-button label="New" amber @click="add = true" />
+        {{-- <x-button label="New" amber @click="add = true" /> --}}
     </div>
     <div class="grid lg:grid-cols-3 gap-3">
         @forelse ($resignees as $resignee)

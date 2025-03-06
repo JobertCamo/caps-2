@@ -1,4 +1,4 @@
-<div class="w-full h-full flex items-center justify-center"> <!-- Set explicit height -->
+{{-- <div class="w-full h-full flex items-center justify-center"> <!-- Set explicit height -->
     <canvas id="myChart" class="w-full h-full shrink-0"></canvas>
 </div>
 
@@ -74,4 +74,38 @@
     } catch (error) {
         console.error('Error rendering chart:', error);
     }
-</script>
+</script> --}}
+@props(['chartData'])
+
+<div>
+    <canvas id="applicantChart"></canvas>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('applicantChart').getContext('2d');
+
+            new Chart(ctx, {
+                type: 'bar', // Change to 'line', 'pie', etc., if needed
+                data: {
+                    labels: @json(array_keys($chartData)), // Months
+                    datasets: [{
+                        label: 'Applicants per Month',
+                        data: @json(array_values($chartData)), // Count of applicants
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</div>

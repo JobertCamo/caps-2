@@ -21,7 +21,7 @@ new #[layout('components.layout')]
     {
         $data = $this->validate([
             'job_position' => ['required'],
-            'email' => ['required'],
+            'email' => ['required', 'email'],
             'contact' => ['required'],
             'reason' => ['required'],
             'file' => ['required', File::types(['pdf'])],
