@@ -61,7 +61,19 @@ new class extends Component {
                 placeholder="Date Completed"
                 errorless
             />
-            <x-input wire:model='file' type="file" label="Proof ex. image" class="" />
+            <div
+                x-data="{ uploading: false, progress: 0 }"
+                x-on:livewire-upload-start="uploading = true"
+                x-on:livewire-upload-finish="uploading = false"
+                x-on:livewire-upload-cancel="uploading = false"
+                x-on:livewire-upload-error="uploading = false"
+                x-on:livewire-upload-progress="progress = $event.detail.progress">
+                <x-input wire:model='file' type="file" label="Proof ex. image" class="" />
+                <div x-show="uploading">
+                    Uploading...
+                    <progress max="100" x-bind:value="progress"></progress>
+                </div>
+            </div>
         </div>
         <div class="w-full mt-5">
             <x-button type="submit" label="Mark as Done" class="w-full" amber />

@@ -4,7 +4,9 @@ use App\Models\Employee;
 use App\Models\Applicant;
 use App\Models\Interview;
 use Livewire\Volt\Component;
+use App\Mail\failedApplicant;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 new class extends Component {
@@ -34,7 +36,11 @@ new class extends Component {
 
     public function delete(Applicant $applicant)
     {
+        
         $this->authorize('delete', $applicant);
+        Mail::to($applicant->email)->send(
+            new failedApplicant($applicant->first_name, $applicant->last_name)
+        );
         $this->failed_applicants($applicant);
         $applicant->delete();
         $this->dispatch('delete-notif');
@@ -42,6 +48,7 @@ new class extends Component {
         if (Storage::exists($applicant->resume)) {
             Storage::delete($applicant->resume);
         }
+        $this->redirect('/applicants');
     }
 
     // Load interview details for update
@@ -110,6 +117,9 @@ new class extends Component {
             'nationality' => $applicant->nationality,
             'religion' => $applicant->religion,
             'civil_status' => $applicant->civil_status,
+            'created_at' => now(),
+            'updated_at' => now(),
+            
         ]);
     }
     

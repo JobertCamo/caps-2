@@ -20,11 +20,17 @@
                 </ul>
             </div>
             <div class="flex items-center space-x-3">
-                {{-- <div>
-                    <x-icon name="bell-alert" class="size-6 shrink-0"/>
-                </div> --}}
+                @can('view-page')
+                <div x-data="{notifi: false}" class="relative z-50">
+                    <x-icon @click="notifi = true" name="bell-alert" class="size-6 shrink-0"/>
+                    <div x-show="notifi" x-cloak @click.away="notifi = false" class="absolute right-0 lg:right-10 bg-white shadow-lg border-[1px] border-black px-3 py-2 min-w-[300px] min-h-[300px] space-y-2">
+                        <div class="text-xl">Notification</div>
+                        <livewire:hr.jobpost-notif />
+                    </div>
+                </div>
+                @endcan
                 <div x-data="{profileDropdown: false}" class="">
-                    <img @click="profileDropdown = true" src="{{ 'storage/' . Auth::user()->profile_picture }}" alt="" class="rounded-full w-9">
+                    <img @click="profileDropdown = true" src="{{ asset('storage/'. Auth::user()->profile_picture) }}" alt="profile" class="rounded-full w-9">
                     <div x-show="profileDropdown" x-transition x-cloak class=" absolute -bottom-[5em] right-2 px-5 py-3 bg-white rounded-md">
                         <div @click.away="profileDropdown = false" class="">
                             <ul class="space-y-2">

@@ -74,7 +74,7 @@ class extends Component {
         <div class="space-y-5">
             <div class="flex items-center gap-2">
                 <img src="{{ asset('storage/'.$file) }}" class="w-24 rounded-full" alt="">
-                {{-- <label for="file-upload" class="cursor-pointer">Change Profile Picture</label> --}}
+                <a href="/change-profile/{{ Auth::user()->id }}" for="file-upload" class="cursor-pointer">Change Profile Picture</a>
                 {{-- <input wire:model='file' id="file-upload" type="file" name="profile_picture" class="hidden"> --}}
             </div>
                 <x-input errorless label="Name" value="{{ $user->name }}" readonly/>

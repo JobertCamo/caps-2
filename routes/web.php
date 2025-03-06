@@ -34,8 +34,10 @@ Route::middleware('auth')->group(function() {
     Route::view('/wall', 'pages-employee.freedom-wall');
     Route::view('/task-list', 'pages-employee.task-list')->can('view-page-employee');
     Route::view('/employee-dashboard', 'pages-employee.dashboard')->can('view-page-employee');
-    Volt::route('/profile-edit/{user}', 'employee.profile')->can('view-page-employee');
+    Volt::route('/profile-edit/{user}', 'employee.profile');
+    Volt::route('/change-profile/{user}', 'employee.change-profile');
     Route::view('/token', 'token')->can('view-page');
+    Route::view('/failed-applicants', 'pages-hr.failed-applicants')->can('view-page');
     // Route::view('/employee-task', 'julsfolder.hr-portal');
     Volt::route('/resignation', 'employee.resignation-form');
 });

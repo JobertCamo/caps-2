@@ -68,7 +68,7 @@ new class extends Component {
                     <div class="flex items-center gap-4 relative" x-data="{del: false, pub: false}">
                         {{-- <a href="/edit-job/{{ $job->id }}"><x-icon name="pencil-square" color="blue" solid /></a> --}}
                         <button @click="pub = true"><x-icon name="ellipsis-vertical" /></button>
-                        <div x-show="pub" @click.away="pub = false" class="absolute top-7 right-7 bg-white shadow-xl px-3 border-[1px] border-gray-500 rounded-md">
+                        <div x-show="pub" x-cloak @click.away="pub = false" class="absolute top-7 right-7 bg-white shadow-xl px-3 border-[1px] border-gray-500 rounded-md">
                             <button class="hover:text-green-700" wire:click='publish({{ $job->id }})'>Publish</button>
                             <button class="hover:text-gray-600" wire:click='unpublish({{ $job->id }})'>Unpublish</button>
                             <button class="hover:text-red-500" @click="del = true">Delete</button>

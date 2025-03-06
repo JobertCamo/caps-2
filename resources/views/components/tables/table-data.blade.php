@@ -18,7 +18,8 @@
     <td class=" p-5" x-data="{delModal: false}">
         {{--  --}}
         <div x-data="{dpdown: false}" class="relative">
-            <x-icon name="ellipsis-vertical" class="cursor-pointer mx-auto" @click="dpdown = true"/>
+            {{-- <x-icon name="ellipsis-vertical" class="cursor-pointer mx-auto" @click="dpdown = true"/> --}}
+            {{ $applicant->department }}
             <div x-show="dpdown" x-transition x-cloak class="text-black/70 roboto-slab w-40 select-none z-10 absolute -left-20 bg-white shadow-2xl border-solid border-[1px] border-black/15 px-1 py-1 rounded-md">
                 <div @click.away="dpdown = false" class="flex flex-col text-start space-y-2">
                     <a wire:navigate.hover href="/profile/{{ $applicant->id }}" class="cursor-pointer hover:bg-black/5 rounded-sm px-2">View Profile</a>

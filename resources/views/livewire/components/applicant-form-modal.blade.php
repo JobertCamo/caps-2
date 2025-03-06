@@ -41,6 +41,7 @@ new class extends Component {
         $data['salary'] = 'N/A';
         Applicant::create($data);
         $this->dispatch('store-notif');
+        $this->redirect('/candidate-list');
     }
     
 }; ?>
@@ -68,19 +69,20 @@ new class extends Component {
             <div>
                 <div class="flex space-x-3 items-center  justify-center">
                     <div>
-                        <x-native-select errorless wire:model="gender" label="Select Gender" :options="['Male', 'Female']" />
+                        <x-native-select errorless wire:model="gender" label="Select Gender" placeholder="Select" :options="['Male', 'Female']" />
                     </div>
                     <div class="w-[30%]">
                         {{-- <label for="date" class=" text-sm">Birth Date</label> --}}
                         <x-input errorless wire:model='birth_date' label="Birth_Date" type="date"/>
                     </div>
                     <div>
-                        <x-phone errorless
+                        <x-input errorless
                         wire:model='contact'
-                        id="multiple-mask"
+                        {{-- id="multiple-mask" --}}
+                        type="number"
                         label="Contact"
                         placeholder="Phone"
-                        :mask="['(###) ###-####', '+# ### ###-####', '+## ## ####-####']"
+                        {{-- :mask="['(###) ###-####', '+# ### ###-####', '+## ## ####-####']" --}}
                     />
                     </div>
                 </div>
@@ -107,7 +109,7 @@ new class extends Component {
                     </div>
                     <div>
                         <x-native-select errorless wire:model='religion' label="Select Religion" 
-                        :options="['Catholic', 'Muslin', 'Iglesia Ni Cristo', 'Born Again']"/>
+                        :options="['Catholic', 'Muslim', 'Iglesia Ni Cristo', 'Born Again']"/>
                     </div>
                 </div>
             </div>

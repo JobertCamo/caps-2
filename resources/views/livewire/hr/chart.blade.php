@@ -8,7 +8,7 @@ new class extends Component {
     {
         return [
             'chartData' => DB::table('applicants')
-                ->selectRaw("strftime('%Y-%m', created_at) as month, COUNT(*) as total_records")
+                ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, COUNT(*) as total_records")
                 ->groupBy('month')
                 ->orderBy('month')
                 ->get()
@@ -17,7 +17,9 @@ new class extends Component {
         ];
     }
 };
+
 ?>
+
 
 
 <div shadow="xl" class="w-[95%] lg:w-[95%] md:h-[100%] md:w-fit sm:w-[90%] m-2 bg-white/80 rounded-xl drop-shadow-lg text-black p-2">

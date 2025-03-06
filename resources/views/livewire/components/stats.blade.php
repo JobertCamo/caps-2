@@ -66,7 +66,7 @@ new class extends Component {
 
     <div class="count-card" >
         <div>
-            <p class="label-count">Failed</p>
+            <a href="/failed-applicants" class="label-count"> Failed</a>
             <p class="text-3xl font-extrabold text-white">{{ $totalFailed->count() }}</p>
         </div>
         <div>

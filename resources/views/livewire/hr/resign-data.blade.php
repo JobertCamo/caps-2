@@ -46,6 +46,12 @@ new class extends Component {
         $this->job_position = $resignation->job_position;
     }
 
+    public function delete(Resignation $resignation)
+    {
+        $resignation->delete();
+        $this->redirect('/offboarding');
+    }
+
     public function resignee()
     {
         return Resignation::query()
@@ -68,12 +74,25 @@ new class extends Component {
         <x-input wire:model.live='q' placeholder="Search Name" icon="magnifying-glass" />
         {{-- <x-button label="New" amber @click="add = true" /> --}}
     </div>
-    <div class="grid lg:grid-cols-3 gap-3">
+    <div class="grid lg:grid-cols-3 gap-3" x-data="{offdel: false}">
         @forelse ($resignees as $resignee)
         <div class="bg-white lg:max-w-[360px] min-h-28  flex flex-col justify-between py-3 px-4 rounded-xl border-[1px] border-gray-200 shadow-xl">
-            <div class="flex justify-between ">
+            <div class="flex justify-between relative">
                 <div class="text-2xl font-bold">{{ $resignee->name }}</div>
                 <button wire:click='update({{ $resignee->id }})' @click="open = true" class="bg-gray-400/50 hover:bg-gray-400 rounded-full text-xs px-2">More Details</button>
+                <button @click="offdel = true" class="absolute -top-3 -right-4"><x-icon class="w-5 h-5" name="x-mark" color="red"/></button>
+            </div>
+            <div>
+                <a href="{{ asset('storage/'. $resignee->file) }}" target="_blank">Letter</a>
+            </div>
+            <div x-show="offdel"  @click.away="delModal = false" x-cloak x-transition class="fixed inset-0 z-10 flex gap-5 items-center justify-center">
+                <div class="shadow-lg shadow-indigo-500/40 bg-white p-12 space-x-5 text-center font-bold text-xl space-y-7">
+                    <div class="text-balance">Are you sure you want to delete ?</div>
+                    <div class="space-x-5">
+                        <x-button @click="offdel = false" rose wire:click='delete({{ $resignee->id }})'>Delete</x-button>  
+                        <x-button @click="offdel = false" positive>Cancel</x-button>
+                    </div>
+                </div>
             </div>
             <div class="flex justify-between">
                 <div class="font-bold text-red-600">{{ $resignee->created_at->format('F d Y') }}</div>

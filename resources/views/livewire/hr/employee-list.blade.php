@@ -147,7 +147,7 @@ new #[layout('components.layout')]
                                 Score
                             </th> --}}
                             <th scope="col" class="p-5 text-sm leading-6 font-semibold text-gray-900 capitalize text-center">
-                                Action
+                                Department
                             </th>
                         </tr>
                     </thead>
