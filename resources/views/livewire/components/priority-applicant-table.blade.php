@@ -88,7 +88,7 @@ new class extends Component {
     <x-notification on="delete-notif" >
         <x-alert title="Applicant Deleted!" negative solid />
     </x-notification>
-    <div class="py-4 px-6 text-2xl">Applicants Lists</div>
+    <div class="py-4 px-6 text-2xl">Priority Applicants Lists</div>
     <div class="mx-1  justify-between flex gap-5 bg-white py-2 px-2 rounded-xl mb-3">
         <div class="w-full">
             <x-input wire:model.live='q' id="q" icon="magnifying-glass" placeholder="Candidate name" />

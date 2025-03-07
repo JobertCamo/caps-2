@@ -28,14 +28,16 @@ new class extends Component {
             <h1 class=" font-bold text-base">
                 {{ $task->title }}
             </h1>
-                
+            <div>
+                {{ $task->user->name }}
+            </div>
         </div>
         <div class="mb-2">
             <p class=" text-xs text-black/50">
                 Department: {{ $task->user->department }}
             </p>
             <p class=" indent-6 text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae in nemo commodi voluptatem sint impedit
+                {{ $task->description }}
             </p>
         </div>
         <div class="flex justify-between mx-2 items-center">

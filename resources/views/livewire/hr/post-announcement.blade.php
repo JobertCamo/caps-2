@@ -40,7 +40,7 @@ new class extends Component {
                         </div>
                     </div> --}}
                     <div class="space-y-5">
-                        <x-input wire:model='title' errorless label="Tite" />
+                        <x-input wire:model='title' errorless label="Title" />
                         <x-textarea wire:model='description' errorless label="Announcement Details" placeholder="announcements............."/>
                     </div>
                     {{-- <div>

@@ -23,7 +23,7 @@ new class extends Component {
     public function submit(){
         $data = $this->validate([
             'first_name' => ['required'],
-            'middle_name' => ['required'],
+            'middle_name' => ['nullable'],
             'last_name' => ['required'],
             'email' => ['required','email','unique:applicants,email'],
             'gender' => ['required'],
@@ -104,11 +104,11 @@ new class extends Component {
                         <x-input errorless wire:model='nationality' label="Nationality" placeholder="Your Nationality"   corner="Ex: Filipino"/>
                     </div>
                     <div>
-                        <x-native-select errorless wire:model='civil_status' label="Civil Status"
+                        <x-native-select errorless wire:model='civil_status' label="Civil Status" placeholder="Select"
                         :options="['Single', 'Married', 'Divorced']"/>
                     </div>
                     <div>
-                        <x-native-select errorless wire:model='religion' label="Select Religion" 
+                        <x-native-select placeholder="Select" errorless wire:model='religion' label="Select Religion" 
                         :options="['Catholic', 'Muslim', 'Iglesia Ni Cristo', 'Born Again']"/>
                     </div>
                 </div>

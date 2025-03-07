@@ -24,7 +24,7 @@ new class extends Component {
 
 <form class="flex flex-col justify-center items-center space-y-4"  wire:submit="submit">
     <div class="space-y-4 w-full">
-        <x-textarea wire:model='post' errorless placeholder="Iskidi pap pa" />
+        <x-textarea wire:model='post' errorless placeholder="Post Something" />
     </div>
     <div class="w-full mt-5">
         <x-button type="submit" label="Post" class="w-full" amber />

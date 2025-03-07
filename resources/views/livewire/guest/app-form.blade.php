@@ -318,7 +318,7 @@ new #[layout('components.usercomponent.appform-layout')]
             <x-icon name="clipboard-document-list" color="blue" class="w-12 h-12" />
             <div>
                 <div class="text-2xl text-gray-700">Terms and Conditions</div>
-                <p class="text-gray-700">smol details</p>
+                <p class="text-gray-700">Details</p>
             </div>
         </div>
         <x-terms />

@@ -75,15 +75,6 @@ new #[layout('components.layout')]
             <a href="">New Hire List</a>
         </div>
         <div class="hidden lg:flex px-2">
-            <div @click="newH = 'test'" class="count-card cursor-pointer p-4 rounded-lg" >
-                <div>
-                    <p class="label-count lg:text-xl sm:text-base" id="tableslide">Total New Hired Employees</p>
-                    <p class="text-3xl font-extrabold text-white" >{{ $employees->count() }}</p>
-                </div>
-                <div>
-                    <img src="{{asset('images/applicants.png')}}" alt="" class="w-24 shrink-0">
-                </div>
-            </div>
             <div class="count-card cursor-pointer p-4 rounded-lg" >
                 <div>
                     <p class="label-count lg:text-xl sm:text-base" id="tableslide">New Hired Employees</p>
@@ -93,6 +84,16 @@ new #[layout('components.layout')]
                     <img src="{{asset('images/thumbs.png')}}" alt="" class="w-24 shrink-0">
                 </div>
             </div>
+            <div @click="newH = 'test'" class="count-card cursor-pointer p-4 rounded-lg" >
+                <div>
+                    <p class="label-count lg:text-xl sm:text-base" id="tableslide">New Hired List</p>
+                    {{-- <p class="text-3xl font-extrabold text-white" >{{ $employees->count() }}</p> --}}
+                </div>
+                <div>
+                    <img src="{{asset('images/applicants.png')}}" alt="" class="w-24 shrink-0">
+                </div>
+            </div>
+            
             <div @click="newH = 'test2'" class="count-card cursor-pointer p-4 rounded-lg" >
                 <div>
                     <p class="label-count lg:text-xl sm:text-base" id="tableslide">Accounts Lists</p>
